@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Navigation, User, Car, Menu, X, Phone, Mail, Star, Clock, Wallet } from 'lucide-react';
+import { MapPin, Navigation, User, Car, Menu, X, Phone, Mail, Star, Clock, Wallet, LogOut } from 'lucide-react';
 
 // Main App Component
 const App = () => {
@@ -50,6 +50,7 @@ const App = () => {
                 key="profile"
                 user={user}
                 userRole={userRole}
+                setIsAuthenticated={setIsAuthenticated}
               />
             )}
           </AnimatePresence>
@@ -87,13 +88,18 @@ const LandingPage = ({ onLogin }) => {
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-2xl border border-white/20">
           <button
             onClick={onLogin}
-            className="w-full bg-white text-gray-900 py-4 rounded-xl font-semibold mb-4 hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg"
+            className="w-full bg-white text-gray-900 py-4 rounded-xl font-semibold mb-4 hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2"
           >
-            Sign in with Google
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" className="w-5 h-5" />
+            <span>Sign in with Google</span>
           </button>
           
-          <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-lg">
-            Sign in with Phone
+          <button 
+            onClick={onLogin}
+            className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2"
+          >
+            <Phone className="w-5 h-5" />
+            <span>Sign in with Phone</span>
           </button>
 
           <div className="mt-6 text-center text-sm text-gray-400">
@@ -166,6 +172,15 @@ const Navbar = ({ user, userRole, setUserRole, showMenu, setShowMenu, setCurrent
               </button>
             </div>
 
+            {/* Desktop Logout Button */}
+            <button 
+              onClick={() => setIsAuthenticated(false)}
+              className="hidden md:flex items-center space-x-2 bg-red-500/10 hover:bg-red-500/20 text-red-400 px-4 py-2 rounded-xl transition-all border border-red-500/20 mr-2"
+            >
+              <LogOut className="w-4 h-4" />
+              <span className="font-semibold text-sm">Logout</span>
+            </button>
+
             <button
               onClick={() => setShowMenu(!showMenu)}
               className="text-white p-2 hover:bg-white/10 rounded-lg"
@@ -212,9 +227,10 @@ const Navbar = ({ user, userRole, setUserRole, showMenu, setShowMenu, setCurrent
                   setIsAuthenticated(false);
                   setShowMenu(false);
                 }}
-                className="w-full text-left text-red-400 py-3 px-4 rounded-lg hover:bg-white/10"
+                className="w-full flex items-center space-x-3 text-red-400 py-3 px-4 rounded-lg hover:bg-white/10"
               >
-                Logout
+                <LogOut className="w-5 h-5" />
+                <span className="font-semibold">Logout</span>
               </button>
             </div>
           </motion.div>
@@ -410,7 +426,7 @@ const CaptainPanel = ({ user }) => {
 };
 
 // Profile View
-const ProfileView = ({ user, userRole }) => {
+const ProfileView = ({ user, userRole, setIsAuthenticated }) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -464,6 +480,16 @@ const ProfileView = ({ user, userRole }) => {
               </div>
             </div>
           )}
+        </div>
+
+        <div className="mt-8 pt-8 border-t border-white/10 flex justify-center">
+          <button 
+            onClick={() => setIsAuthenticated(false)}
+            className="flex items-center space-x-2 bg-red-500/20 hover:bg-red-500/30 text-red-400 px-8 py-3 rounded-xl transition-all border border-red-500/50 font-bold"
+          >
+            <LogOut className="w-5 h-5" />
+            <span>Logout</span>
+          </button>
         </div>
       </div>
     </motion.div>
