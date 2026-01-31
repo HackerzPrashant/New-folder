@@ -1,16 +1,48 @@
+# Dependency directories
 node_modules/
+jspm_packages/
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+.nuxt/
+.cache/
+.parcel-cache/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-build/
-dist/
+.env.sample
+
+# OS files
 .DS_Store
-*.log
-.cache/
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Testing
 coverage/
 .nyc_output/
+
+# Replit files (keep .replit, ignore others if needed)
+# .replit is usually committed, but replit.nix sometimes is too
