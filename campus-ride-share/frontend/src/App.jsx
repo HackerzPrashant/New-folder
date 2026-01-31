@@ -26,13 +26,14 @@ const App = () => {
         <LandingPage onLogin={() => setIsAuthenticated(true)} />
       ) : (
         <>
-          <Navbar 
+            <Navbar 
             user={user}
             userRole={userRole}
             setUserRole={setUserRole}
             showMenu={showMenu}
             setShowMenu={setShowMenu}
             setCurrentView={setCurrentView}
+            setIsAuthenticated={setIsAuthenticated}
           />
           
           <AnimatePresence mode="wait">
@@ -126,7 +127,7 @@ const LandingPage = ({ onLogin }) => {
 };
 
 // Navbar Component
-const Navbar = ({ user, userRole, setUserRole, showMenu, setShowMenu, setCurrentView }) => {
+const Navbar = ({ user, userRole, setUserRole, showMenu, setShowMenu, setCurrentView, setIsAuthenticated }) => {
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -206,7 +207,13 @@ const Navbar = ({ user, userRole, setUserRole, showMenu, setShowMenu, setCurrent
               <button className="w-full text-left text-white py-3 px-4 rounded-lg hover:bg-white/10">
                 Ride History
               </button>
-              <button className="w-full text-left text-red-400 py-3 px-4 rounded-lg hover:bg-white/10">
+              <button 
+                onClick={() => {
+                  setIsAuthenticated(false);
+                  setShowMenu(false);
+                }}
+                className="w-full text-left text-red-400 py-3 px-4 rounded-lg hover:bg-white/10"
+              >
                 Logout
               </button>
             </div>
