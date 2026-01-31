@@ -190,8 +190,8 @@ app.use((err, req, res, next) => {
 });
 
 // Start server
-const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => {
+const PORT = process.env.PORT || 3001;
+server.listen(PORT, 'localhost', () => {
     console.log(`🚀 Server running on port ${PORT}`);
     console.log(`👉 Test the health check: http://localhost:${PORT}/health`);
 });
